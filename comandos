@@ -1,0 +1,16 @@
+comandos a serem usados
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet new tool-manifest
+dotnet tool install dotnet-ef
+
+// Depois de criar todo o código rodar apenas uma vez
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+// Adicionar biblioteca de API
+dotnet add package Swashbuckle.AspNetCore
+
+dotnet run

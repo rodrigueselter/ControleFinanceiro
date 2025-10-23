@@ -41,10 +41,13 @@ while (true)
 {
     Console.WriteLine();
     Console.WriteLine("Escolha uma opção:");
-    Console.WriteLine("1 - Cadastrar estudante");
-    Console.WriteLine("2 - Listar estudantes");
-    Console.WriteLine("3 - Atualizar estudante (por Id)");
-    Console.WriteLine("4 - Remover estudante (por Id)");
+    Console.WriteLine("1 - Cadastrar transação");
+    Console.WriteLine("2 - Listar transações");
+    Console.WriteLine("3 - Atualizar transação (por Id)");
+    Console.WriteLine("4 - Remover transação (por Id)");
+    Console.WriteLine("5 - Ver saldo atual");
+    Console.WriteLine("6 - Relatório por categoria");
+    Console.WriteLine("7 - Últimas transações");
     Console.WriteLine("0 - Sair");
     Console.Write("> ");
 
@@ -143,4 +146,5 @@ async Task DeleteStudentAsync()
     db.Students.Remove(student);
     await db.SaveChangesAsync();
     Console.WriteLine("Estudante removido com sucesso.");
+
 }

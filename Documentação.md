@@ -77,7 +77,7 @@ Campos (conforme `Models/Transaction.cs` e `AppDbContext`):
 |------------|-----------|------------------------------------------|-------------------------------------|
 | `Id`       | int       | PK                                       | Identificador da transação          |
 | `Descricao`| string    | `IsRequired()`, `HasMaxLength(100)`      | Descrição curta                     |
-| `Valor`    | decimal   | `decimal(10,2)`                          | Valor monetário                     |
+| `Valor`    | decimal   | `IsRequired()`, `decimal(10,2)`          | Valor monetário                     |
 | `Tipo`     | string    | `IsRequired()`, `HasMaxLength(20)`       | **"Receita"** ou **"Despesa"**      |
 | `Categoria`| string    | `IsRequired()`, `HasMaxLength(20)`       | Ex.: Alimentação, Salário, etc.     |
 | `Data`     | DateTime  | `IsRequired()`, `DEFAULT CURRENT_TIMESTAMP` | UTC por padrão                     |

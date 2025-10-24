@@ -166,7 +166,7 @@ curl -X DELETE http://localhost:5099/api/v1/Transactions/1
 ```
 
 ### 6) Resumo financeiro
-**GET** `/api/v1/Transactions/resumo`  
+**GET** `/api/v1/Transactions/saldo`  
 Calcula totais e saldo com base nos registros. O controller retorna algo no formato:
 
 ```json
@@ -174,12 +174,12 @@ Calcula totais e saldo com base nos registros. O controller retorna algo no form
   "receitas": 5000.00,
   "despesas": 3200.50,
   "saldo": 1799.50,
-  "status": "Positivo" // ou "Negativo"
+  "status": "Positivo" // ou "Negativo", caso as despesas sejam maiores que as receitas
 }
 ```
 
 ```bash
-curl -X GET http://localhost:5099/api/v1/Transactions/resumo
+curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 ```
 
 ## Regras de Negócio e Validações

@@ -3,6 +3,7 @@
 Projeto desenvolvido para a disciplina **Desenvolvimento de Sistemas**, com o objetivo de criar uma **API REST** para controle financeiro pessoal.
 A API permite **CRUD de transações (receitas e despesas)** e fornece um **endpoint de resumo** com totais de receitas e despesas e o saldo.
 
+## ⚙️ Configuração do Projeto
 **Comandos Necessários para Configuração do Projeto**
 Abaixo estão todos os comandos utilizados para configurar o ambiente, instalar dependências, criar o banco de dados e executar a aplicação.
 
@@ -192,3 +193,10 @@ curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 - Microsoft.EntityFrameworkCore.Design 9.0.10
 - Microsoft.EntityFrameworkCore.Sqlite 9.0.10
 - Swashbuckle.AspNetCore 9.0.6
+
+## 👥 Autores
+- Elter Rodrigues
+- Kauanne Julia
+
+## 🧾 Licença
+Uso acadêmico. Todos os direitos reservados aos autores.

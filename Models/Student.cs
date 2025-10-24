@@ -1,8 +1,10 @@
 namespace Controle.Models;
 
-public class Student{
+public class Transaction{
     public int Id {get;set;}
-    public string Name {get;set;} = "";
-    public string Email {get;set;} = "";
-    public DateTime EnrollmentDate {get;set;} = DateTime.UtcNow;
+    public string Descricao { get; set; } = "";
+    public decimal Valor { get; set; } = 0;
+    public string Tipo { get; set; } = "";
+    public string Categoria { get; set; } = "";
+    public DateTime Data {get;set;} = DateTime.UtcNow;
 }

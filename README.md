@@ -101,6 +101,19 @@ Campos (conforme `Models/Transaction.cs` e `AppDbContext`):
    ```
    A aplicação inicia por padrão em **http://localhost:5099** (definido em `Program.cs`).
 
+## 📁 Estrutura do Projeto
+
+```plaintext
+ControleFinanceiro/
+├── Controllers/
+│   └── TransactionsController.cs
+├── Models/
+│   └── Transaction.cs
+├── Data/
+│   └── AppDbContext.cs
+├── Program.cs
+└── ControleFinanceiro.csproj
+```
 ## Endpoints
 
 Base route do controller: `api/v1/[controller]` → resolve para `api/v1/Transactions`.

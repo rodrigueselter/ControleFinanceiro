@@ -1,63 +1,108 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Escola.Data;
-using Escola.Models;
+using Controle.Data;
+using Controle.Models;
 
 namespace Escola.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")] // Utiliza nome  do arquivo/classe
-public class StudentsController : ControllerBase{
+public class TransactionsController : ControllerBase{
     private readonly AppDbContext _db;
-    public StudentsController(AppDbContext db)=>_db =db;
+    public TransactionsController(AppDbContext db)=>_db =db;
 
-    //GET /api/v1/students
+    //GET /api/v1/Transactions
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Student>>> GetAll()
-        => Ok(await _db.Students.OrderBy(s=>s.Id).ToListAsync());
+    public async Task<ActionResult<IEnumerable<Transaction>>> GetAll()
+        => Ok(await _db.Transactions.OrderBy(t=>t.Id).ToListAsync());
     
-    //GET /api/v1/students/1(id)
+    //GET /api/v1/Transactions/1(id)
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<Student>> GetById(int id)
-        => await _db.Students.FindAsync(id) is { } s ? Ok(s) : NotFound();
+    public async Task<ActionResult<Transaction>> GetById(int id)
+        => await _db.Transactions.FindAsync(id) is { } t ? Ok(t) : NotFound();
 
-    //POST  /api/v1/students
+    //POST  /api/v1/Transactions
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Student s){
-        if(!string.IsNullOrWhiteSpace(s.Email) &&
-            await _db.Students.AnyAsync(x=>x.Email == s.Email)){
-                return Conflict(new {error = "Email já cadastrado"});
-            }
-        _db.Students.Add(s);
+    public async Task<IActionResult> Create([FromBody] Transaction t){
+        // Validações
+        // Descrição obrigatória
+        if (string.IsNullOrWhiteSpace(t.Descricao))
+            return BadRequest(new { error = "A descrição é obrigatória." });
+
+        // Valor maior que 0
+        if (t.Valor <= 0)
+            return BadRequest(new { error = "O valor tem que ser maior que 0." });
+
+        // Tipo obrigatório e deve ser Receita ou Despesa
+        if (string.IsNullOrWhiteSpace(t.Tipo) || (t.Tipo != "Receita" && t.Tipo != "Despesa"))
+            return BadRequest(new { error = "O tipo deve ser 'Receita' ou 'Despesa'." });
+
+        // Caso não coloque a categoria, adiciona 'Outros' por padrão
+        if (string.IsNullOrWhiteSpace(t.Categoria))
+            t.Categoria = "Outros";
+
+        _db.Transactions.Add(t);
         await _db.SaveChangesAsync();
-        return CreatedAtAction(nameof (GetById), new {id = s.Id}, s);
+        return CreatedAtAction(nameof (GetById), new {id = t.Id}, t);
     }
 
-    //PUT /api/v1/students/1(id)
+    //PUT /api/v1/Transactions/1(id)
     [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Student s){
-        s.Id = id;
+    public async Task<IActionResult> Update(int id, [FromBody] Transaction t){
+        t.Id = id;
 
-         if(!string.IsNullOrWhiteSpace(s.Email) &&
-            await _db.Students.AnyAsync(x=>x.Email == s.Email && x.Id != id)){
-                return Conflict(new {error = "Email já cadastrado."});
-            }
+        // Validações
+        // Descrição obrigatória
+        if (string.IsNullOrWhiteSpace(t.Descricao))
+            return BadRequest(new { error = "A descrição é obrigatória." });
 
-        if(!await _db.Students.AnyAsync(x=> x.Id == id)) return NotFound();
+        // Valor maior que 0
+        if (t.Valor <= 0)
+            return BadRequest(new { error = "O valor tem que ser maior que 0." });
 
-        _db.Entry(s).State = EntityState.Modified;
+        // Tipo obrigatório e deve ser Receita ou Despesa
+        if (string.IsNullOrWhiteSpace(t.Tipo) || (t.Tipo != "Receita" && t.Tipo != "Despesa"))
+            return BadRequest(new { error = "O tipo deve ser 'Receita' ou 'Despesa'." });
+
+        if(!await _db.Transactions.AnyAsync(x=> x.Id == id)) return NotFound();
+
+        _db.Entry(t).State = EntityState.Modified;
         await _db.SaveChangesAsync();
         return Ok();
-    } 
+    }
 
-    // DELETE /api/v1/students/1(id)
+    // DELETE /api/v1/Transactions/1(id)
     [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Delete (int id){
-        var s = await _db.Students.FindAsync(id);
-        if(s is null) return NotFound();
+    public async Task<IActionResult> Delete(int id)
+    {
+        var t = await _db.Transactions.FindAsync(id);
+        if (t is null) return NotFound();
 
-        _db.Students.Remove(s);
+        _db.Transactions.Remove(t);
         await _db.SaveChangesAsync();
         return NoContent();
+    }
+
+    // GET /api/v1/Transactions/saldo
+    [HttpGet("saldo")]
+    public async Task<IActionResult> GetSaldo()
+    {
+        var receitas = await _db.Transactions
+            .Where(t => t.Tipo == "Receita")
+            .SumAsync(t => (decimal?)t.Valor) ?? 0;
+
+        var despesas = await _db.Transactions
+            .Where(t => t.Tipo == "Despesa")
+            .SumAsync(t => (decimal?)t.Valor) ?? 0;
+
+        var saldo = receitas - despesas;
+
+        return Ok(new
+        {
+            receitas,
+            despesas,
+            saldo,
+            status = saldo >= 0 ? "Positivo" : "Negativo"
+        });
     }
 }

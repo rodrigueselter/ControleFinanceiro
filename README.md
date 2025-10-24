@@ -202,16 +202,19 @@ curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 - `Valor` deve ser **>= 0**.
 - `Data` padrão em UTC; o banco usa `CURRENT_TIMESTAMP` como default.
 
+---
 ## 🪵 Logs
 - Utilize o `ILogger` (injeção no controller) para registrar eventos de CRUD e cálculos do resumo.
 - Em produção, considere um provider persistente (Serilog, Seq, etc.).
 
+---
 ## 📦 Dependências (do `.csproj`)
 - Microsoft.EntityFrameworkCore 9.0.10
 - Microsoft.EntityFrameworkCore.Design 9.0.10
 - Microsoft.EntityFrameworkCore.Sqlite 9.0.10
 - Swashbuckle.AspNetCore 9.0.6
 
+---
 ## 👥 Autores
 - Elter Rodrigues
 - Kauanne Julia

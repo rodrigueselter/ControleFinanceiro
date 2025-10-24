@@ -121,9 +121,9 @@ async Task ListTransactionsAsync()
         return; 
     }
 
-    Console.WriteLine("ID | Tipo     | Valor      | Categoria        | Descrição");
+    Console.WriteLine("ID | Tipo     | Valor      | Categoria       | Descrição            | Data");
     foreach (var t in Transactions)
-        Console.WriteLine($"{t.Id,2} | {t.Tipo,-8} | {t.Valor,10:C} | {t.Categoria,-15} | {t.Descricao}");
+        Console.WriteLine($"{t.Id,2} | {t.Tipo,-8} | {t.Valor,10:C} | {t.Categoria,-15} | {t.Descricao,-20} | {t.Data}");
 }
 
 // função para atualizar transação
@@ -216,3 +216,4 @@ async Task ShowSaldoAsync()
     Console.WriteLine($"Saldo: {saldo:C}");
     Console.WriteLine(saldo >= 0 ? "Você está no positivo!" : "Cuidado! Saldo negativo!");
 }
+

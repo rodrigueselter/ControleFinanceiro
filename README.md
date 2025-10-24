@@ -1,16 +1,7 @@
-# ControleFinanceiro
-trabalho de desenvolvimento de sistemas
+# 💰 Controle Financeiro - API REST (.NET 9.0 + EF Core + SQLite)
 
-
-# Controle Financeiro — Documentação da API (ASP.NET Core 9 + EF Core)
-
-
-
-## Visão Geral
-Este projeto é uma **API REST** para controle financeiro, construída com **.NET net9.0**, **Entity Framework Core** e **SQLite**. 
-A API permite **CRUD de transações** (receitas e despesas) e expõe um **endpoint de resumo** com totais e saldo.
-
-
+Projeto desenvolvido para a disciplina **Desenvolvimento de Sistemas**, com o objetivo de criar uma **API REST** para controle financeiro pessoal.
+A API permite **CRUD de transações (receitas e despesas)** e fornece um **endpoint de resumo** com totais de receitas e despesas e o saldo.
 
 **Comandos Necessários para Configuração do Projeto**
 Abaixo estão todos os comandos utilizados para configurar o ambiente, instalar dependências, criar o banco de dados e executar a aplicação.

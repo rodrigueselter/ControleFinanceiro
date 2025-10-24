@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Controle.Models;
-
+ 
 namespace Controle.Data;
 
 public class AppDbContext : DbContext{
     public AppDbContext(){}
     public AppDbContext(DbContextOptions<AppDbContext> options) :base(options){}
 
-    public  DbSet<Student> Students => Set<Student>();
+    public  DbSet<Transaction> Transactions => Set<Transaction>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -16,11 +16,19 @@ public class AppDbContext : DbContext{
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Student>(e =>{
-            e.HasKey(s=>s.Id);
-            e.Property(s=>s.Name).IsRequired().HasMaxLength(120);
-            e.Property(s=>s.Email).IsRequired().HasMaxLength(100);
-            e.HasIndex(s=>s.Email).IsUnique(); // email único
+        modelBuilder.Entity<Transaction>(e =>{
+            // Campo ID da transação
+            e.HasKey(t => t.Id);
+            // Campo Descrição
+            e.Property(t => t.Descricao).IsRequired().HasMaxLength(100);
+            // Campo Valor
+            e.Property(t => t.Valor).IsRequired().HasColumnType("decimal(10,2)");
+            // Campo Tipo
+            e.Property(t => t.Tipo).IsRequired().HasMaxLength(20);
+            // Campo Categoria
+            e.Property(t => t.Categoria).IsRequired().HasMaxLength(20);
+            // Campo Data
+            e.Property(t=>t.Data).IsRequired().HasDefaultValueSql("CURRENT_TIMESTAMP");
         });
     }
 }

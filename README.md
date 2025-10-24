@@ -3,6 +3,8 @@
 Projeto desenvolvido para a disciplina **Desenvolvimento de Sistemas**, com o objetivo de criar uma **API REST** para controle financeiro pessoal.
 A API permite **CRUD de transações (receitas e despesas)** e fornece um **endpoint de resumo** com totais de receitas e despesas e o saldo.
 
+---
+
 ## ⚙️ Configuração do Projeto
 **Comandos Necessários para Configuração do Projeto**
 Abaixo estão todos os comandos utilizados para configurar o ambiente, instalar dependências, criar o banco de dados e executar a aplicação.
@@ -17,8 +19,6 @@ Instalar pacotes do Entity Framework Core
 `dotnet add package Microsoft.EntityFrameworkCore.Design`
 
 Esses pacotes permitem o uso do Entity Framework Core e do banco de dados SQLite no projeto.
-
-
 
 **Criar e Atualizar o Banco de Dados (rodar somente uma vez)**
 
@@ -101,6 +101,8 @@ Campos (conforme `Models/Transaction.cs` e `AppDbContext`):
    ```
    A aplicação inicia por padrão em **http://localhost:5099** (definido em `Program.cs`).
 
+---
+
 ## 📁 Estrutura do Projeto
 
 ```plaintext
@@ -114,6 +116,8 @@ ControleFinanceiro/
 ├── Program.cs
 └── ControleFinanceiro.csproj
 ```
+---
+
 ## 🔗 Endpoints
 
 Base route do controller: `api/v1/[controller]` → resolve para `api/v1/Transactions`.
@@ -190,6 +194,7 @@ Calcula totais e saldo com base nos registros. O controller retorna algo no form
 ```bash
 curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 ```
+---
 
 ## 🧠 Regras de Negócio e Validações
 - `Tipo` deve ser **"Receita"** ou **"Despesa"** (padronize na camada de serviço/validação).
@@ -201,7 +206,7 @@ curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 - Utilize o `ILogger` (injeção no controller) para registrar eventos de CRUD e cálculos do resumo.
 - Em produção, considere um provider persistente (Serilog, Seq, etc.).
 
-### Dependências (do `.csproj`)
+## 📦 Dependências (do `.csproj`)
 - Microsoft.EntityFrameworkCore 9.0.10
 - Microsoft.EntityFrameworkCore.Design 9.0.10
 - Microsoft.EntityFrameworkCore.Sqlite 9.0.10

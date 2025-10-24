@@ -144,10 +144,18 @@ curl -X POST http://localhost:5099/api/v1/Transactions   -H "Content-Type: appli
 
 ### 4) Atualizar transação
 **PUT** `/api/v1/Transactions/{id}`  
-Body (JSON) — mesmos campos do POST.
+Body (JSON):
+```json
+{
+  "descricao": "Salário",
+  "valor": 4500.00,
+  "tipo": "Receita",
+  "categoria": "Trabalho"
+}
+```
 
 ```bash
-curl -X PUT http://localhost:5099/api/v1/Transactions/1   -H "Content-Type: application/json"   -d '{"descricao":"Salário Outubro","valor":4600.00,"tipo":"Receita","categoria":"Trabalho","data":"2025-10-24T08:00:00Z"}'
+curl -X PUT http://localhost:5099/api/v1/Transactions/1   -H "Content-Type: application/json"   -d '{"descricao":"Salário Outubro","valor":4600.00,"tipo":"Receita","categoria":"Trabalho"}'
 ```
 
 ### 5) Remover transação

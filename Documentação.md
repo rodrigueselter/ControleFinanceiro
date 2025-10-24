@@ -134,13 +134,12 @@ Body (JSON):
   "descricao": "Salário",
   "valor": 4500.00,
   "tipo": "Receita",
-  "categoria": "Trabalho",
-  "data": "2025-10-24T08:00:00Z"
+  "categoria": "Trabalho"
 }
 ```
 
 ```bash
-curl -X POST http://localhost:5099/api/v1/Transactions   -H "Content-Type: application/json"   -d '{"descricao":"Salário","valor":4500.00,"tipo":"Receita","categoria":"Trabalho","data":"2025-10-24T08:00:00Z"}'
+curl -X POST http://localhost:5099/api/v1/Transactions   -H "Content-Type: application/json"   -d '{"descricao":"Salário","valor":4500.00,"tipo":"Receita","categoria":"Trabalho"}'
 ```
 
 ### 4) Atualizar transação

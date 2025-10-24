@@ -185,7 +185,7 @@ curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 ## Regras de Negócio e Validações
 - `Tipo` deve ser **"Receita"** ou **"Despesa"** (padronize na camada de serviço/validação).
 - `Descricao`, `Tipo` e `Categoria` são obrigatórios e com limites de tamanho (100/20/20).
-- `Valor` deve ser **>= 0** (sugestão: validar antes de persistir).
+- `Valor` deve ser **>= 0**.
 - `Data` padrão em UTC; o banco usa `CURRENT_TIMESTAMP` como default.
 
 ## Logs

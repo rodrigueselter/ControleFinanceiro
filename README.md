@@ -114,7 +114,7 @@ ControleFinanceiro/
 ├── Program.cs
 └── ControleFinanceiro.csproj
 ```
-## Endpoints
+## 🔗 Endpoints
 
 Base route do controller: `api/v1/[controller]` → resolve para `api/v1/Transactions`.
 
@@ -191,13 +191,13 @@ Calcula totais e saldo com base nos registros. O controller retorna algo no form
 curl -X GET http://localhost:5099/api/v1/Transactions/saldo
 ```
 
-## Regras de Negócio e Validações
+## 🧠 Regras de Negócio e Validações
 - `Tipo` deve ser **"Receita"** ou **"Despesa"** (padronize na camada de serviço/validação).
 - `Descricao`, `Tipo` e `Categoria` são obrigatórios e com limites de tamanho (100/20/20).
 - `Valor` deve ser **>= 0**.
 - `Data` padrão em UTC; o banco usa `CURRENT_TIMESTAMP` como default.
 
-## Logs
+## 🪵 Logs
 - Utilize o `ILogger` (injeção no controller) para registrar eventos de CRUD e cálculos do resumo.
 - Em produção, considere um provider persistente (Serilog, Seq, etc.).
 
